@@ -1,4 +1,5 @@
 export abstract class Produto {
+    tipo: any;
     constructor(
         private _id: number,
         private _nome: string,

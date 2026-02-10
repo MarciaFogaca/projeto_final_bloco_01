@@ -1,6 +1,6 @@
 import { Produto } from "./Produto";
 
-export class Peca extends Produto {
+export class Peça extends Produto {
     constructor(id: number, nome: string, tipo: number, preco: number, private _garantia: number) {
         super(id, nome, tipo, preco);
     }
