@@ -1,7 +1,8 @@
 import { Produto } from "./Produto";
 
-export class Ferramenta extends Produto {
+export class Acessorio extends Produto {
   private _fabricante: string;
+  private _garantia: number;
 
   constructor(
     id: number,
@@ -10,9 +11,11 @@ export class Ferramenta extends Produto {
     preco: number,
     quantidade: number,
     fabricante: string,
+    garantia: number,
   ) {
     super(id, nome, tipo, preco, quantidade);
     this._fabricante = fabricante;
+    this._garantia = garantia;
   }
 
   public get fabricante() {
@@ -22,8 +25,16 @@ export class Ferramenta extends Produto {
     this._fabricante = fabricante;
   }
 
+  public get garantia() {
+    return this._garantia;
+  }
+  public set garantia(garantia: number) {
+    this._garantia = garantia;
+  }
+
   public visualizar(): void {
     super.visualizar();
     console.log(`Fabricante: ${this._fabricante}`);
+    console.log(`Garantia: ${this._garantia} meses`);
   }
 }
