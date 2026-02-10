@@ -3,28 +3,31 @@ import { ProdutoController } from "./controller/ProdutoController";
 import { Ferramenta } from "./model/Ferramenta";
 import { Input } from "./util/Input";
 import { Peça } from "./model/Peça"; 
+import { Cliente } from "./model/Cliente";
+import { OrdemServico } from "./model/OrdemServico";
 
 let produtos = new ProdutoController();
 
 export function main() {
     let opcao: number;
 
-   
-    produtos.cadastrar(new Ferramenta(0, "Chave Pentalope - torque", 1, 350.00, "Wera"));
-    produtos.cadastrar(new Peça(0, "Topcase", 2, 1250.00, 12)); 
+    
+    produtos.cadastrar(new Ferramenta(produtos.gerarId(), "Chave Pentalope - torque", 1, 350.00, "Wera"));
+    produtos.cadastrar(new Peça(produtos.gerarId(), "Topcase", 2, 1250.00, 12)); 
 
     while (true) {
-       
         console.log(Colors.fg.bluestrong +
                     "╔══════════════════════════════════════════════════╗");
         console.log("║             Global Repair ECommerce              ║");
-        console.log("║            *- Excelência em Atender! -*          ║");
+        console.log("║          *- Excelência em Atender! -*            ║");
         console.log("╠══════════════════════════════════════════════════╣");
         console.log("║   [1] Cadastrar Produto                          ║");
         console.log("║   [2] Listar Todos os Produtos                   ║");
         console.log("║   [3] Consultar Produto por ID                   ║");
         console.log("║   [4] Atualizar Dados do Produto                 ║");
         console.log("║   [5] Apagar Produto                             ║");
+        console.log("║   [6] Cadastrar OS                               ║");
+        console.log("║   [7] Listar Cliente                             ║");
         console.log("║   [0] Sair                                       ║");
         console.log("╚══════════════════════════════════════════════════╝" + Colors.reset);
 
@@ -43,6 +46,8 @@ export function main() {
             case 3: buscarProdutoporId(); break;
             case 4: atualizarProduto(); break;
             case 5: deletarProduto(); break;
+            case 6: cadastrarOS(); break;   
+            case 7: listarClientes(); break;
             default:
                 console.log(Colors.fg.whitestrong, "\nOpção Inválida!\n", Colors.reset);
         }
@@ -53,7 +58,6 @@ export function main() {
 
 function criarProduto(): void {
     console.log("\nOpção Selecionada: Cadastrar Produto");
-
     let nome = Input.question("Digite o Nome do Produto: ");
     let preco = Input.questionFloat("Digite o Preco: ");
     let tipo = Input.keyInSelect(["Ferramenta", "Peça"], "Selecione o Tipo do Produto: ", { cancel: false }) + 1;
@@ -81,7 +85,6 @@ function buscarProdutoporId(): void {
 function atualizarProduto(): void {
     console.log("\nOpção Selecionada: Atualizar Dados do Produto");
     let id = Input.questionInt("Digite o ID do produto que deseja atualizar: ");
-    
     let produtoExistente = produtos.buscarNoArray(id);
 
     if (produtoExistente !== null) {
@@ -111,8 +114,14 @@ function sobre(): void {
     console.log("\n******************************************************");
     console.log("Projeto Desenvolvido por: Márcia Telles Fogaça");
     console.log("marciatellesfogaca@gmail.com");
-    console.log("\nhttps://github.com/MarciaFogaca");
+    console.log("https://github.com/MarciaFogaca");
     console.log("*******************************************************");
+
+    // extra
+    const clienteExemplo = new Cliente(1, "Cliente Teste Extra", "(21) 98888-7777");
+    const produtoExemplo = new Ferramenta(99, "Chave Pentalobe", 1, 150.0, "Wera");
+    const os = new OrdemServico(5001, clienteExemplo, produtoExemplo);
+    os.visualizar();
 }
 
 function keyPress(): void {
@@ -121,3 +130,11 @@ function keyPress(): void {
 }
 
 main();
+
+function listarClientes() {
+    throw new Error("Function not implemented.");
+}
+function cadastrarOS() {
+    throw new Error("Function not implemented.");
+}
+
